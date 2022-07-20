@@ -163,6 +163,7 @@
       - "helm upgrade --install --cleanup-on-fail --wait --timeout 30m0s \
                              dashboard kubernetes-dashboard/kubernetes-dashboard \
                              --namespace=kube-system \
+                             --version 5.7.0 \
                              --values /etc/dashboard-values.yml"
   when: nginx_ingress.enabled
 
@@ -184,6 +185,7 @@
       - "helm upgrade --install --cleanup-on-fail --wait --timeout 30m0s \
                              prometheus prometheus/prometheus \
                              --namespace=prometheus \
+                             --version 15.10.4 \
                              --values /etc/prometheus-values.yml"
   when: nginx_ingress.enabled
 
@@ -201,7 +203,8 @@
       - kubectl apply -f /etc/eagle-namespace.yml
       - "helm upgrade --install --cleanup-on-fail --wait --timeout 30m0s \
                              kube-eagle kube-eagle/kube-eagle \
-                             --namespace=kube-eagle"
+                             --namespace=kube-eagle \
+                             --version 2.0.0"
   when: nginx_ingress.enabled
 
 - name: install grafana 
